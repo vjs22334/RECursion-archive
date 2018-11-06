@@ -8,11 +8,9 @@ class Question(models.Model):
         ("E","Easy"),
         ("M","Medium"),
         ("H","Hard"),
-        ("O","other")
     ]
     questionName = models.CharField(max_length=100)
     difficulty = models.CharField(choices = difficulties, max_length=50)
-    difficulty_description = models.CharField(max_length=100)
     questionLink = models.URLField(max_length=500)
     solutionLink = models.URLField(max_length=500)
     summary = models.TextField()
