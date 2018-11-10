@@ -8,10 +8,10 @@
      <title>Document</title>
 </head>
 <body>
- <form method="post">
-     {% csrf_token %}
-     <h2>Are you sure you want to remove {{ question.questionName }}</h2>
-     <button type="submit">Confirm</button>
- </form>
+     <p>User <b>{{user.username}}</b> is logged in successfully.</p>
+     <form method="POST" action="/logout/">
+         {% csrf_token %}
+         <input type="submit" value="Logout">
+     </form>
 </body>
 </html>
