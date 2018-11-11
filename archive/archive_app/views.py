@@ -7,17 +7,17 @@ from .forms import QuestionForm, UserForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 
 # Create your views here.
 
 def user_register(request):
-    form = UserForm(request.POST or None)
+    form = UserCreationForm(request.POST or None)
 
     if form.is_valid():
         if User.objects.filter(username=['username']).exists():
             return redirect('user_register')
-
         form.save()
         return redirect('user_login')
     return render(request, 'register.html', {'form': form})
@@ -58,9 +58,8 @@ def list_questions(request):
 @login_required
 def create_question(request):
     form = QuestionForm(request.POST or None)
-
     if form.is_valid():
-        form.save(request.User)
+        form.save()
         return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form})
