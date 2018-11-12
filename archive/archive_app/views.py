@@ -50,7 +50,7 @@ def user_logout(request):
 
 @login_required
 def list_questions(request):
-    questions =Question.objects.all()
+    questions = Question.objects.all()
     return render(request, 'questions.html', {
         'questions': questions
     })
@@ -82,7 +82,7 @@ def update_question(request, id):
 @login_required
 def delete_question(request, id):
     try:
-        question =get__or_404( Question,pk=id)
+        question =get_object_or_404( Question,pk=id)
     except:
         return HttpResponse("id does not exist")  
    
