@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,get_object_or_404,get_list_or_404
+from django.shortcuts import render, redirect,get_object_or_404, get_list_or_404
 from .models import Question
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -62,9 +62,14 @@ def create_question(request):
 
         if Question.objects.filter(questionLink=request.POST['questionLink']).exists():
             return redirect('create_questions')
-
         else:
-            form.save()
+           # import pdb; pdb.set_trace()
+            new_ques = form.save(commit='False')
+            # abc = request.user
+            # print(abc)
+            new_ques.addedBy = "sasdas"
+            new_ques.save()
+            # print(request.user)
             return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form})

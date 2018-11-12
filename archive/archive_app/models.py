@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Question(models.Model):
@@ -14,7 +15,7 @@ class Question(models.Model):
     questionLink = models.URLField(max_length=500)
     solutionLink = models.URLField(max_length=500)
     summary = models.TextField()
-    addedBy = models.ForeignKey(User, on_delete=models.CASCADE)
+    addedBy = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     addedOn = models.DateTimeField(auto_now=False, auto_now_add=True)
     lastModified = models.DateTimeField(auto_now=True, auto_now_add=False)
 
