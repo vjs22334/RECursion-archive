@@ -59,8 +59,13 @@ def list_questions(request):
 def create_question(request):
     form = QuestionForm(request.POST or None)
     if form.is_valid():
-        form.save()
-        return redirect('list_questions')
+
+        if Question.objects.filter(questionLink=request.POST['questionLink']).exists():
+            return redirect('create_questions')
+
+        else:
+            form.save()
+            return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form})
 
