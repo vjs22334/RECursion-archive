@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404,get_list_or_404
 from .models import Question
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -71,21 +71,29 @@ def create_question(request):
 
 @login_required
 def update_question(request, id):
-    question = Question.objects.get(id=id)
-    form = QuestionForm(request.POST or None, instance=question)
+    try:
+        question =get_object_or_404( Question,pk=id)
+    except:
+        return HttpResponse("id does not exist")  
+    else:      
+        form = QuestionForm(request.POST or None, instance=question)
 
-    if form.is_valid():
-        form.save()
-        return redirect('list_questions')
+        if form.is_valid():
+            form.save()
+            return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form, 'question': question})
 
 @login_required
 def delete_question(request, id):
-    question=Question.objects.get(id=id)
+    try:
+        question =get_object_or_404( Question,pk=id)
+    except:
+        return HttpResponse("id does not exist")  
+   
+    else:
+       if request.method == 'POST':
+           question.delete()
+           return redirect('list_questions')
 
-    if request.method == 'POST':
-        question.delete()
-        return redirect('list_questions')
-
-    return render(request, 'ques-delete-confirm.html', {'question': question})
+       return render(request, 'ques-delete-confirm.html', {'question': question})
