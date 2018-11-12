@@ -63,13 +63,9 @@ def create_question(request):
         if Question.objects.filter(questionLink=request.POST['questionLink']).exists():
             return redirect('create_questions')
         else:
-           # import pdb; pdb.set_trace()
-            new_ques = form.save(commit='False')
-            # abc = request.user
-            # print(abc)
-            new_ques.addedBy = "sasdas"
-            new_ques.save()
-            # print(request.user)
+            f = form.save(commit=False)
+            f.addedBy = request.user
+            f.save()
             return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form})
