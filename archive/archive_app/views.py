@@ -67,7 +67,7 @@ def create_question(request):
 @login_required
 def update_question(request, id):
     try:
-        question = Question.objects.get(id=id)
+        question =get_object_or_404( Question,pk=id)
     except:
         return HttpResponse("id does not exist")  
     else:      
@@ -82,7 +82,7 @@ def update_question(request, id):
 @login_required
 def delete_question(request, id):
     try:
-        question = Question.objects.get(id=id)
+        question =get__or_404( Question,pk=id)
     except:
         return HttpResponse("id does not exist")  
    
