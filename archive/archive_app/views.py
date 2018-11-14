@@ -30,7 +30,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request,user)
-            return HttpResponseRedirect(reverse('user_success'))
+            return HttpResponseRedirect(reverse('list_questions'))
         else:
             context["error"] = "Provide Valid Credentials!!"
             return render(request, "login.html", context)
@@ -38,15 +38,12 @@ def user_login(request):
         return render(request, "login.html", context)
 
 @login_required
-def success(request):
-    context = {}
-    context['user'] = request.user
-    return render(request, "success.html", context)
-
 def user_logout(request):
-    if request.method == "POST":
-        logout(request)
+    logout(request)
     return HttpResponseRedirect(reverse('user_login'))
+
+
+       
 
 @login_required
 def list_questions(request):

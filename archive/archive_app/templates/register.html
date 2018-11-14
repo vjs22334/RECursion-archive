@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalab=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>Document</title>
-</head>
-<body>
-    <h1>New User</h1>
+{% extends 'base.html' %}
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Save</button>
-    </form>
-</body>
-</html>
+{% block Title %}
+    Register
+{% endblock Title %}
+
+
+{% block content %}
+<h1>New User</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {% include 'includes/bs4_form.html' with form=form %}
+    <button type="submit">Save</button>
+</form>
+{% endblock content %}
+    
+    
+    
