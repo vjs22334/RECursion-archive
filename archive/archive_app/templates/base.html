@@ -18,7 +18,10 @@
 </head>
 <body>
 <div class="navigation">
-    <a href="{% url 'create_questions' %}">New Questions</a>
+    <a href="{% url 'create_questions' %}">New_Question</a>
+    <a href="{% url 'list_questions' %}">list_Question</a>
+    <a href="{% url 'create_tag' %}">new_tag</a>
+    <a href="{% url 'list_tags' %}">list_tags</a>
     
     {% if user.is_authenticated %}
     <span>welcome {{user.username}}</span>
