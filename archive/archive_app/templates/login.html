@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalab=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Document</title>
+</head>
+<body>
+ <form method="POST">
+     {% csrf_token %}
+     <table>
+         <tr>
+             <td><label for="username">Username</label></td>
+             <td><input type="text" name="username" id="username" required></td>
+         </tr>
+         <tr>
+             <td>
+                 <label for="password">Password</label></td>
+             <td><input type="password" name="password" id="password" required></td>
+         </tr>
+         <p>{{ error }}</p>
+     </table>
+     <button type="submit">Confirm</button>
+ </form>
+<a href="{% url 'user_register' %}">Register Here!</a>
+</body>
+</html>
