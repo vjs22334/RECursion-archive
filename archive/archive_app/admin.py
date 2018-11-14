@@ -4,7 +4,7 @@ from .models import Question,Tag
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-   readonly_fields = ['addedOn','lastModified','addedBy']
+   readonly_fields = ['addedOn','lastModified']
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
