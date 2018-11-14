@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect,get_object_or_404, get_list_or_404
-from .models import Question
+from .models import Question,Tag
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader, RequestContext
-from .forms import QuestionForm, UserForm
+from .forms import QuestionForm, UserForm, TagForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -66,6 +66,23 @@ def create_question(request):
         return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form})
+
+@login_required
+def list_tags(request):
+    tags = Tag.objects.all()
+    return render(request, 'tags.html', {
+        'tags': tags
+    })
+
+@login_required
+def create_tag(request):
+    form = TagForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('list_tags')
+
+    return render(request, 'tag-form.html', {'form': form})
+
 
 @login_required
 def update_question(request, id):
