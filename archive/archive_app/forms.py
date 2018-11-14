@@ -9,7 +9,7 @@ class QuestionForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(QuestionForm, self).clean()
         link = cleaned_data.get('questionLink')
-        if Question.objects.filter(questionLink=link).exists():
+        if Question.objects.filter(questionLink=link).exists() and self.instance.pk==None :
             Q = Question.objects.get(questionLink=link)
             raise forms.ValidationError('Question Already exists: '+Q.questionName)
 class UserForm(forms.ModelForm):
