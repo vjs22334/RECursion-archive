@@ -60,13 +60,13 @@ def create_question(request):
     form = QuestionForm(request.POST or None)
     if form.is_valid():
 
-        if Question.objects.filter(questionLink=request.POST['questionLink']).exists():
-            return redirect('create_questions')
-        else:
-            f = form.save(commit=False)
-            f.addedBy = request.user
-            f.save()
-            return redirect('list_questions')
+        # if Question.objects.filter(questionLink=request.POST['questionLink']).exists():
+        #     return redirect('create_questions')
+        # else:
+        f = form.save(commit=False)
+        f.addedBy = request.user
+        f.save()
+        return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form})
 
