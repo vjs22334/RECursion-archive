@@ -46,8 +46,17 @@ def user_logout(request):
        
 
 @login_required
-def list_questions(request):
-    questions = Question.objects.all()
+def list_questions(request,tagId = None):
+    #import pdb;pdb.set_trace()
+    if tagId:
+        try:
+            tag = get_object_or_404(Tag,pk=tagId)
+            
+        except:
+            return HttpResponse("tag does not exist")
+        questions = tag.question_set.all()
+    else:
+        questions = Question.objects.all()
     return render(request, 'questions.html', {
         'questions': questions
     })
@@ -87,7 +96,7 @@ def create_tag(request):
 @login_required
 def update_question(request, id):
     try:
-        question =get_object_or_404( Question,pk=id)
+        question = get_object_or_404( Question,pk=id)
     except:
         return HttpResponse("id does not exist")  
     else:      
@@ -104,7 +113,7 @@ def delete_question(request, id):
     try:
         question =get_object_or_404( Question,pk=id)
     except:
-        return HttpResponse("id does not exist")  
+        return HttpResponse("question does not exist")  
    
     else:
        if request.method == 'POST':

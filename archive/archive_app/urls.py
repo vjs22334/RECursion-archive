@@ -4,6 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('', list_questions ,name='list_questions'),
+    path('list_question_tag/<int:tagId>', list_questions ,name='list_questions_tag'),
     path('new_question', create_question , name='create_questions'),
     path('update/<int:id>/', update_question, name='update_question'),
     path('delete/<int:id>/', delete_question, name='delete_question'),

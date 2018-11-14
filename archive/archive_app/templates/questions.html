@@ -8,14 +8,33 @@
 
 {% block content %}
 
-
-    <ul>
-        {% for question in questions %}
-           <a href="{% url 'update_question' question.id %}">
-               <li>{{question.questionName}}</li>
-           </a>
-        {% endfor %}
-    </ul>
+    
+    {% if questions %}
+        <ul class="list-group">
+            {% for question in questions %}
+                <li class="list-group-item">
+                    <span>Name:</span>
+                    <a href="{% url 'update_question' question.id %}">{{question.questionName}}</a>
+                    <br>
+                    <span>Difficulty: {{question.get_difficulty_display}}</span>
+                    <br>
+                    <span>tags:</span>
+                    <br>
+                    <ul>
+                        {% for tag in question.tags.all %}
+                            <li>{{tag.tagname}}</li>
+                        {% endfor %}
+                    </ul>
+                    
+                        
+                </li>
+            {% endfor %}
+        </ul>   
+    {% else %}
+        <span>No questions yet</span>
+    {% endif %}
+        
+    
     
 
 {% endblock content %}

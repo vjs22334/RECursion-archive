@@ -11,7 +11,9 @@
 
     <ul>
         {% for tag in tags %}
+            <a href="{% url 'list_questions_tag' tag.id %}">
                <li>{{tag.tagname}}</li>
+            </a>
         {% endfor %}
     </ul>
     
