@@ -8,7 +8,7 @@ urlpatterns = [
     path('new_question', create_question , name='create_questions'),
     path('update/<int:id>/', update_question, name='update_question'),
     path('delete/<int:id>/', delete_question, name='delete_question'),
-    path('new_tag',create_tag,name='create_tag'),
+   # path('new_tag',create_tag,name='create_tag'),
     path('list_tags',list_tags,name='list_tags'),
 
     path('login/', user_login, name="user_login"),

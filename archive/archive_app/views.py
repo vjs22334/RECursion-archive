@@ -83,7 +83,7 @@ def list_tags(request):
         'tags': tags
     })
 
-@login_required
+"""@login_required
 def create_tag(request):
     form = TagForm(request.POST or None)
     if form.is_valid():
@@ -92,7 +92,7 @@ def create_tag(request):
 
     return render(request, 'tag-form.html', {'form': form})
 
-
+"""
 @login_required
 def update_question(request, id):
     try:
