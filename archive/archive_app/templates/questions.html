@@ -16,6 +16,9 @@
                     <span>Name:</span>
                     <a href="{% url 'update_question' question.id %}">{{question.questionName}}</a>
                     <br>
+                    <span>added by: {{question.addedBy.username}}</span>
+                    <br>
+                    <br>
                     <span>Difficulty: {{question.get_difficulty_display}}</span>
                     <br>
                     <span>tags:</span>
